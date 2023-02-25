@@ -41,8 +41,10 @@ function App() {
 
     function getProduct(searchText: string){
         axios.post("https://trackapi.nutritionix.com/v2/natural/nutrients",
-            {"query":searchText},
-            {headers: {'Content-Type':'application/json', 'x-app-id': 'ce599520', 'x-app-key': 'd9c077dd192791192a3792a89203515f'}})
+            {query:{searchText}},
+            {headers: {'Content-Type':'application/json',
+                    'x-app-id': process.env.API_LOGIN,
+                    'x-app-key': process.env.API_KEY}})
             .then(response => response.data)
             .then(data => setProduct(data))
             .catch(console.error)
